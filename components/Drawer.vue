@@ -3,6 +3,7 @@
     v-model="drawer"
     clipped
     fixed
+    width="200"
     app
   >
     <v-list>

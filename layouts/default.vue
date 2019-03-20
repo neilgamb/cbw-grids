@@ -5,7 +5,6 @@
     <v-content fluid fill-height>
       <nuxt />
     </v-content>
-    <Footer />
   </v-app>
 </template>
 
@@ -14,14 +13,12 @@ import VenueService from '../server/services/VenueService'
 import EventService from '../server/services/EventService'
 import Header from '../components/Header'
 import Drawer from '../components/Drawer'
-import Footer from '../components/Footer'
 
 export default {
   name: 'App',
   components: {
     Header,
-    Drawer,
-    Footer
+    Drawer
   },
   data() {
     return {
