@@ -2,10 +2,8 @@
   <v-app dark>
     <Header />
     <Drawer />
-    <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
+    <v-content fluid fill-height>
+      <nuxt />
     </v-content>
     <Footer />
   </v-app>

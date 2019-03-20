@@ -3,6 +3,7 @@
     clipped-left
     fixed
     app
+    flat
   >
     <v-toolbar-side-icon @click="handleDrawerToggle" />
   </v-toolbar>

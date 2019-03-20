@@ -1,15 +1,13 @@
 <template>
   <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
+    <v-flex xs12>
       <v-card>
-        <v-card-title primary-title>
-          <div>
-            <h3 class="headline mb-0">
-              Login
-            </h3>
-          </div>
+        <v-card-title class="headline">
+          Login
         </v-card-title>
-
+        <v-card-text>
+          <p>Please login with Google to access the grids!</p>
+        </v-card-text>
         <v-card-actions>
           <v-btn flat color="orange" @click="login">
             Login
