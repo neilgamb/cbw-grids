@@ -1,4 +1,4 @@
-# JazzFestGrids
+# CouldBeWorseGrids
 
 > Redesign of www.jazzfestgrids.com using NuxtJS
 

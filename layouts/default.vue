@@ -1,101 +1,55 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      mini-variant
-      clipped
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-tile
-          to="/"
-          router
-          exact
-        >
-          <v-list-tile-action>
-            <v-icon>home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile
-          to="/inspire"
-          router
-          exact
-        >
-          <v-list-tile-action>
-            <v-icon>code</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Inspire</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile
-          to="/login"
-          router
-          exact
-          @click="logout"
-        >
-          <v-list-tile-action>
-            <v-icon>exit_to_app</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Logout</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-toolbar
-      clipped-left
-      fixed
-      app
-    >
-      <v-toolbar-side-icon @click="drawer = !drawer" />
-    </v-toolbar>
+    <Header />
+    <Drawer />
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer
-      fixed
-      app
-    >
-      <span>&copy; 2019</span>
-    </v-footer>
+    <Footer />
   </v-app>
 </template>
 
 <script>
-// import VenueService from "../server/services/VenueService";
+import VenueService from '../server/services/VenueService'
 import EventService from '../server/services/EventService'
+import Header from '../components/Header'
+import Drawer from '../components/Drawer'
+import Footer from '../components/Footer'
 
 export default {
-  name: 'CouldBeWorseGrids',
+  name: 'App',
+  components: {
+    Header,
+    Drawer,
+    Footer
+  },
   data() {
     return {
-      drawer: false,
       user: null,
-      events: null
+      events: null,
+      venues: null
     }
   },
   mounted() {
     this.getEvents()
+    this.getVenues()
     this.user = this.$auth
   },
   methods: {
-    logout() {
-      this.$auth.logout()
-    },
     async getEvents() {
       try {
         const events = await EventService.getEvents()
         this.events = events
-        // console.log(events)
       } catch (error) {
-        // console.log(error)
+      }
+    },
+    async getVenues() {
+      try {
+        const venues = await VenueService.getVenues()
+        this.venues = venues
+      } catch (error) {
       }
     }
   }

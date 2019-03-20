@@ -16,6 +16,9 @@ async function start() {
   const events = require('./routes/events')
   app.use('/events', events)
 
+  const venues = require('./routes/venues')
+  app.use('/venues', venues)
+
   // Build only in dev mode
   if (config.dev) {
     const builder = new Builder(nuxt)
