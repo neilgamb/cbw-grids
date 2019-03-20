@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer" mini-variant clipped fixed app>
+  <v-navigation-drawer :value="open" mini-variant clipped fixed app>
     <v-list>
       <v-list-tile to="/" router exact>
         <v-list-tile-action>
@@ -30,13 +30,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Drawer',
-  data() {
-    return {
-      drawer: true
-    }
+  computed: {
+    ...mapGetters({ open: 'general/drawer' })
   },
   methods: {
     logout() {
