@@ -1,4 +1,4 @@
-# CouldBeWorseGrids
+# cbw-grids
 
 > Redesign of www.jazzfestgrids.com using NuxtJS
 
