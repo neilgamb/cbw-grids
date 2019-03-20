@@ -9,17 +9,40 @@
     >
       <v-list>
         <v-list-tile
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
+          to="/"
           router
           exact
         >
           <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>home</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title v-text="item.title" />
+            <v-list-tile-title>Home</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile
+          to="/inspire"
+          router
+          exact
+        >
+          <v-list-tile-action>
+            <v-icon>code</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Inspire</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile
+          to="/login"
+          router
+          exact
+          @click="logout"
+        >
+          <v-list-tile-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Logout</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -53,26 +76,7 @@ export default {
   name: 'CouldBeWorseGrids',
   data() {
     return {
-      clipped: false,
       drawer: false,
-      items: [
-        {
-          icon: 'apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'bubble_chart',
-          title: 'Inspire',
-          to: '/inspire'
-        },
-        {
-          icon: 'person',
-          title: 'Account',
-          to: '/login'
-        }
-      ],
-      title: 'Vuetify.js',
       user: null,
       events: null
     }
@@ -80,12 +84,10 @@ export default {
   mounted() {
     this.getEvents()
     this.user = this.$auth
-    this.$auth.logout()
   },
   methods: {
-    login() {
-      // this.$auth.loginWith('google')
-      // this.$auth.logout()
+    logout() {
+      this.$auth.logout()
     },
     async getEvents() {
       try {
