@@ -23,15 +23,28 @@
           <v-list-tile-title>The Map</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile to="/profile" router exact>
+
+      <v-list-tile v-if="loggedIn" to="/profile" router exact>
         <v-list-tile-action>
-          <v-icon>person</v-icon>
+          <v-avatar size="35">
+            <img :src="profilePic">
+          </v-avatar>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Profile</v-list-tile-title>
+          <v-list-tile-title>My Grids</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile @click="logout">
+
+      <v-list-tile v-if="!loggedIn" to="/profile" router exact @click="login">
+        <v-list-tile-action>
+          <v-icon>exit_to_app</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Sign In</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+
+      <v-list-tile v-if="loggedIn" @click="logout">
         <v-list-tile-action>
           <v-icon>exit_to_app</v-icon>
         </v-list-tile-action>
@@ -49,6 +62,12 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({ open: 'general/drawer' }),
+    loggedIn() {
+      return this.$auth.loggedIn
+    },
+    profilePic() {
+      return this.$auth.loggedIn && this.$auth.user.picture
+    },
     drawer: {
       get() {
         return this.open
@@ -63,6 +82,9 @@ export default {
       openDrawer: 'general/openDrawer',
       closeDrawer: 'general/closeDrawer'
     }),
+    login() {
+      this.$auth.loginWith('google')
+    },
     logout() {
       this.$auth.logout()
     }
