@@ -21,6 +21,12 @@ module.exports = {
         href:
           'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
       }
+    ],
+    script: [
+      { 
+        type: 'text/javascript',
+        src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDB3I1jK9QxzxbbLvedWlb6rajAkTGH2JE&libraries=places'
+      }
     ]
   },
 
