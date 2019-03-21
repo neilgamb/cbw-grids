@@ -105,38 +105,9 @@ export default {
 }
 
 .titleContainer {
-  // height: 150%;
   width: 100%;
   display: flex;
   justify-content: space-between;
-
-  .logoContainer {
-    position: relative;
-    width: 50%;
-
-    .logo-jazzfest {
-      // font-family: "Rock Salt", cursive;
-      // color: $primary;
-      font-size: 20px;
-      line-height: 23px;
-      // text-shadow: 1px 1px $black;
-      transform: rotate(-32deg);
-      z-index: 2;
-      position: absolute;
-      top: 20px;
-      left: 10px;
-    }
-
-    .logo-grids {
-      font-family: "Monoton", cursive;
-      font-size: 35px;
-      // color: lighten($secondary, 10%);
-      // animation: glow 3s ease-in-out infinite alternate;
-      position: absolute;
-      top: 20px;
-      left: 60px;
-    }
-  }
 }
 
 .manualDateNav {

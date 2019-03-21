@@ -7,7 +7,7 @@ export const state = () => ({
 export const getters = {
   venues: state => state.venues,
   events: state => state.events,
-  grid: state => state.grid.filter(gridItem => gridItem.period === state.currentPeriod && gridItem.day === state.currentDay)
+  grid: (state, getters, rootState) => state.grid.filter(gridItem => gridItem.period === rootState.general.currentPeriod && gridItem.day === rootState.general.currentDay)
 }
 
 export const actions = {

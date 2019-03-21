@@ -1,20 +1,37 @@
 <template>
-  <v-layout>
-    <v-flex xs12>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to Could Be Worse Grids!
-        </v-card-title>
-        <v-card-text>
-          <p>Homepage / unfiltered grids to go here</p>
-        </v-card-text>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <Grid
+    :current-day="currentDay"
+    :set-current-day="setCurrentDay"
+    :dates="dates"
+    :grid="grid"
+    class="gridViewContainer"
+  />
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+import Grid from '../components/grid/Grid'
+
 export default {
-  auth: false
+  name: 'GridView',
+  components: {
+    Grid
+  },
+  computed: {
+    ...mapGetters({
+      dates: 'general/dates',
+      grid: 'grid/grid',
+      currentDay: 'general/currentDay'
+    })
+  },
+  methods: {
+    ...mapActions({ setCurrentDay: 'general/setCurrentDay' })
+  }
 }
 </script>
+
+<style lang='scss' scoped>
+.gridViewContainer {
+  padding: 0px 10px;
+}
+</style>
