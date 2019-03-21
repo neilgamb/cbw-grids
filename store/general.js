@@ -20,6 +20,12 @@ export const actions = {
   },
   closeDrawer({ commit }) {
     commit('closeDrawer')
+  },
+  setCurrentDay({ commit }, day) {
+    commit('setCurrentDay', day)
+  },
+  setCurrentPeriod({ commit }, period) {
+    commit('setCurrentPeriod', period)
   }
 }
 
@@ -29,5 +35,11 @@ export const mutations = {
   },
   closeDrawer(state) {
     state.drawer = false
+  },
+  setCurrentDay(state, day) {
+    state.currentDay = day
+  },
+  setCurrentPeriod(state, period) {
+    state.currentPeriod = period
   }
 }
