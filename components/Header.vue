@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar dark fixed app>
+  <v-toolbar clipped-left dark fixed app>
     <v-toolbar-title class="titleContainer">
       <v-toolbar-side-icon @click="handleDrawerToggle" />
     </v-toolbar-title>

@@ -18,7 +18,7 @@
         <div class="time">
           {{ eventTime(event.event.date) }}
         </div>
-        <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+        <span v-if="event.event.price">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
         <div v-if="event.event.price" class="price">
           ${{ event.event.price }}
         </div>
