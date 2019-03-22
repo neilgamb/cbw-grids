@@ -1,57 +1,35 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    width="500"
-  >
-    <template v-slot:activator="{ on }">
-      <div class="event" v-on="on">
+  <div class="event">
+    <div class="band-container">
+      <div class="band">
+        {{ event.event.band }}
+      </div>
+      <div v-if="event.event.featuring && event.event.featuring.length > 0" class="featuring">
+        <div>
+          <i>featuring</i>
+        </div>
+        <div v-for="(feature, i) in event.event.featuring" :key="i" class="feature">
+          {{ feature }}
+        </div>
+      </div>
+    </div>
+    <div class="details-container">
+      <div class="time-and-price">
         <div class="time">
           {{ eventTime(event.event.date) }}
         </div>
-        <div class="band-container">
-          <div class="band">
-            {{ event.event.band }}
-          </div>
-          <div v-if="event.event.featuring && event.event.featuring.length > 0" class="featuring">
-            <div>
-              <i>featuring</i>
-            </div>
-            <div v-for="(feature, i) in event.event.featuring" :key="i" class="feature">
-              {{ feature }}
-            </div>
-          </div>
+        <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+        <div v-if="event.event.price" class="price">
+          ${{ event.event.price }}
         </div>
       </div>
-    </template>
-
-    <v-card v-if="venue" class="showDetailContainer">
-      <v-card-title>
-        <h3>{{ event.event.band }}</h3>
-      </v-card-title>
-      <v-divider />
-      <v-card-text class="showDetail">
-        <p class="time">
-          {{ eventTime(event.event.date) }} at {{ venue.name }}
-        </p>
-        <div v-if="event.event.featuring && event.event.featuring.length > 0" class="featuring">
-          <p><i>Featuring</i></p>
-          <p v-for="(feature, i) in event.event.featuring" :key="i" class="feature">
-            {{ feature }}
-          </p>
-        </div>
-      </v-card-text>
-      <v-divider />
-      <v-card-actions>
-        <v-spacer />
-        <v-btn color="primary" @click="dialog = false">
-          Close
+      <div v-if="event.event.price" class="tickets">
+        <v-btn small color="success" target="_blank" :href="`${event.event.tix}`">
+          Purchase Tickets
         </v-btn>
-        <v-btn color="primary" :href="`${event.event.tix}`" target="_blank">
-          Purchase Tix!
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -88,15 +66,9 @@ export default {
 .event {
   display: flex;
   width: 100%;
-  flex-direction: row;
+  flex-direction: column;
   box-sizing: border-box;
-
-  .time {
-    flex: 1;
-    font-size: 12px;
-    padding: 5px;
-    // font-family: "Avenir", Helvetica, Arial, sans-serif;
-  }
+  padding: 10px;
 
   .band-container {
     flex: 4;
@@ -104,11 +76,9 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 5px 5px 5px 0px;
 
     .band {
-      // font-family: 'Sedgwick Ave', cursive;
-      // font-size: 14px;
+      font-size: 18px;
       width: 100%;
       text-align: center;
     }
@@ -116,7 +86,6 @@ export default {
     .featuring {
       // font-size: 10px;
       margin-top: 5px;
-      // font-family: "Avenir", Helvetica, Arial, sans-serif;
       width: 100%;
       text-align: center;
 
@@ -124,6 +93,19 @@ export default {
         // font-size: 12px;
         margin-top: 3px;
       }
+    }
+  }
+
+  .details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .time-and-price {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

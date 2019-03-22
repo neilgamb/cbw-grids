@@ -34,7 +34,7 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 5px;
-    font-size: 16px;
+    font-size: 18px;
     text-align: center;
   }
 

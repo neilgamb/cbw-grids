@@ -9,17 +9,17 @@
     >
       <div class="bottomNavBtn" @click="setCurrentPeriod(bottomNav)">
         <v-btn dark>
-          <span>Weekend<br>One</span>
+          <span class="tab">Weekend<br>One</span>
         </v-btn>
       </div>
       <div class="bottomNavBtn" @click="setCurrentPeriod(bottomNav)">
         <v-btn dark>
-          <span>Daze<br>Between</span>
+          <span class="tab">Daze<br>Between</span>
         </v-btn>
       </div>
       <div class="bottomNavBtn" @click="setCurrentPeriod(bottomNav)">
         <v-btn dark>
-          <span>Weekend<br>Two</span>
+          <span class="tab">Weekend<br>Two</span>
         </v-btn>
       </div>
     </v-bottom-nav>
@@ -56,7 +56,6 @@ export default {
 .footerContainer {
   height: auto;
   justify-content: flex-end;
-  // font-family: "Rock Salt", cursive;
 
   .bottomNavBtn {
     display: flex;
@@ -64,6 +63,10 @@ export default {
 
     button {
       max-width: none;
+
+      .tab {
+        font-size: 18px;
+      }
     }
   }
 
