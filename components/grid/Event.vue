@@ -14,18 +14,16 @@
       </div>
     </div>
     <div class="details-container">
-      <div class="time-and-price">
-        <div class="time">
-          {{ eventTime(event.event.date) }}
-        </div>
-        <span v-if="event.event.price">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-        <div v-if="event.event.price" class="price">
-          ${{ event.event.price }}
-        </div>
+      <div class="time">
+        {{ eventTime(event.event.date) }}
+      </div>
+      <div v-if="event.event.price" class="price">
+        <v-icon>attach_money</v-icon>
+        {{ event.event.price }}
       </div>
       <div v-if="event.event.price" class="tickets">
-        <v-btn small color="success" target="_blank" :href="`${event.event.tix}`">
-          Purchase Tickets
+        <v-btn style="font-size: 16px" small outline target="_blank" :href="`${event.event.tix}`">
+          Tix
         </v-btn>
       </div>
     </div>
@@ -78,20 +76,19 @@ export default {
     justify-content: center;
 
     .band {
-      font-size: 18px;
       width: 100%;
       text-align: center;
+      font-size: 20px;
     }
 
     .featuring {
-      // font-size: 10px;
       margin-top: 5px;
       width: 100%;
       text-align: center;
 
       .feature {
-        // font-size: 12px;
         margin-top: 3px;
+        font-size: 16px;
       }
     }
   }
@@ -100,37 +97,28 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
 
-    .time-and-price {
+    .time,
+    .price,
+    .tikets {
       display: flex;
-      justify-content: center;
       align-items: center;
-    }
-  }
-}
+      justify-content: center;
+      flex: 1;
+      font-size: 16px;
 
-.showDetailContainer {
-
-  .showDetail {
-    font-size: 16px;
-
-    .time {
-      font-family: "Avenir", Helvetica, Arial, sans-serif;
-    }
-
-    .featuring {
-
-      p {
-        font-size: 12px;
-        margin-bottom: 5px;
-      }
-
-      .feature {
-        margin-bottom: 0px;
-        font-family: "Avenir", Helvetica, Arial, sans-serif;
+      i {
+        font-size: 18px;
+        margin-right: 3px;
       }
     }
+
+    // .time-and-price {
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
+    // }
   }
 }
 </style>

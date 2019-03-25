@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <div>
     <div class="venue">
       {{ gridItem.venue.venue.name }}
     </div>
@@ -10,7 +10,7 @@
         :event="event"
       />
     </div>
-  </v-card>
+  </div>
 </template>
 
 <script>
@@ -34,8 +34,8 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 5px;
-    font-size: 18px;
     text-align: center;
+    font-size: 18px;
   }
 
   .events {
@@ -44,6 +44,6 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border-left: 1px solid #56555e;
+    border-left: 3px solid white;
   }
 </style>

@@ -29,9 +29,3 @@ export default {
   }
 }
 </script>
-
-<style lang='scss' scoped>
-.gridViewContainer {
-  padding: 0px 10px;
-}
-</style>

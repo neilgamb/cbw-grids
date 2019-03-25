@@ -9,17 +9,17 @@
     >
       <div class="bottomNavBtn" @click="setCurrentPeriod(bottomNav)">
         <v-btn dark>
-          <span class="tab">Weekend<br>One</span>
+          <span class="tab">weekend<br>one</span>
         </v-btn>
       </div>
       <div class="bottomNavBtn" @click="setCurrentPeriod(bottomNav)">
         <v-btn dark>
-          <span class="tab">Daze<br>Between</span>
+          <span class="tab">daze<br>between</span>
         </v-btn>
       </div>
       <div class="bottomNavBtn" @click="setCurrentPeriod(bottomNav)">
         <v-btn dark>
-          <span class="tab">Weekend<br>Two</span>
+          <span class="tab">weekend<br>two</span>
         </v-btn>
       </div>
     </v-bottom-nav>
@@ -39,9 +39,9 @@ export default {
   computed: {
     color() {
       switch (this.bottomNav) {
-        case 0: return '#48224f'
-        case 1: return '#826316'
-        case 2: return '#354d1a'
+        case 0: return '#212121'
+        case 1: return '#212121'
+        case 2: return '#212121'
         default: return null
       }
     }
@@ -56,6 +56,7 @@ export default {
 .footerContainer {
   height: auto;
   justify-content: flex-end;
+  border-top: 3px solid white;
 
   .bottomNavBtn {
     display: flex;
@@ -64,8 +65,8 @@ export default {
     button {
       max-width: none;
 
-      .tab {
-        font-size: 18px;
+      span {
+        font-size: 16px;
       }
     }
   }

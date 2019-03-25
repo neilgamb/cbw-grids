@@ -1,7 +1,15 @@
 <template>
-  <v-toolbar clipped-left dark fixed app>
+  <v-toolbar
+    clipped-left
+    dark
+    fixed
+    flat
+    app
+    class="headerContainer"
+  >
     <v-toolbar-title class="titleContainer">
       <v-toolbar-side-icon @click="handleDrawerToggle" />
+      <h1>grids</h1>
     </v-toolbar-title>
     <div v-if="!isMobile" class="manualDateNav">
       <v-btn icon color="primary darken-2" @click="currentDayDown">
@@ -21,11 +29,11 @@
       >
         <slide v-for="date in dates" :key="date.date.toString()" class="date-container">
           <div class="day-of-week">
-            {{ dayOfWeek(date.date) }}
+            {{ dayOfWeek(date.date).toLowerCase() }}
           </div>
           <div class="calendar-container">
             <div class="month">
-              {{ monthOfYear(date.date) }}
+              {{ monthOfYear(date.date).toLowerCase() }}
             </div>
             <div class="day">
               {{ date.date.getDate() }}
@@ -97,17 +105,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// @import "../scss/_mixins.scss";
-// @import "../scss/variables.scss";
 
 /deep/ .v-toolbar__content {
   padding: 0px;
 }
 
+.headerContainer {
+  border-bottom: 3px solid white;
+}
+
 .titleContainer {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
 }
 
 .manualDateNav {
@@ -126,8 +136,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      // font-family: "Sedgwick Ave", cursive;
-      font-size: 22px;
+      font-size: 24px;
     }
 
     .calendar-container {
@@ -137,7 +146,7 @@ export default {
       align-items: center;
 
       .month {
-        font-size: 10px;
+        font-size: 14px;
       }
 
       .day {
