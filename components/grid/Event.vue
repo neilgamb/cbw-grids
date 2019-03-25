@@ -98,10 +98,11 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    // max-width: 500px;
 
     .time,
     .price,
-    .tikets {
+    .tickets {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -113,12 +114,6 @@ export default {
         margin-right: 3px;
       }
     }
-
-    // .time-and-price {
-    //   display: flex;
-    //   justify-content: center;
-    //   align-items: center;
-    // }
   }
 }
 </style>
