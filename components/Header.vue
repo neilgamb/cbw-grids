@@ -20,40 +20,37 @@
       </v-btn>
     </div>
     <div class="carouselContainer">
-      <carousel
-        :navigate-to="currentDay"
-        :per-page="1"
-        :mouse-drag="false"
-        :pagination-enabled="false"
-        @pageChange="setCurrentDay"
-      >
-        <slide v-for="date in dates" :key="date.date.toString()" class="date-container">
-          <div class="day-of-week">
-            {{ dayOfWeek(date.date).toLowerCase() }}
-          </div>
-          <div class="calendar-container">
-            <div class="month">
-              {{ monthOfYear(date.date).toLowerCase() }}
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+          <li v-for="date in dates" :key="date.date.toString()" class="date-container glide__slide">
+            <div class="day-of-week">
+              {{ dayOfWeek(date.date).toLowerCase() }}
             </div>
-            <div class="day">
-              {{ date.date.getDate() }}
+            <div class="calendar-container">
+              <div class="month">
+                {{ monthOfYear(date.date).toLowerCase() }}
+              </div>
+              <div class="day">
+                {{ date.date.getDate() }}
+              </div>
             </div>
-          </div>
-        </slide>
-      </carousel>
+          </li>
+        </ul>
+      </div>
     </div>
   </v-toolbar>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { Carousel, Slide } from 'vue-carousel'
+import Glide from '@glidejs/glide'
 import { dayOfWeek, monthOfYear } from '../assets/helpers'
 
 export default {
-  components: {
-    Carousel,
-    Slide
+  data() {
+    return {
+      glide: null
+    }
   },
   computed: {
     ...mapGetters({
@@ -65,6 +62,19 @@ export default {
     isMobile() {
       return window.innerWidth < 1024
     }
+  },
+  watch: {
+    currentDay: function (val) {
+      this.glide.go(`=${val}`)
+    },
+    currentPeriod: function () {
+      if (!this.glide) this.createGlide()
+      this.glide.destroy()
+      this.glide = null
+    }
+  },
+  mounted() {
+    this.createGlide()
   },
   methods: {
     ...mapActions({
@@ -98,6 +108,22 @@ export default {
       newDay++
       this.setCurrentDay(newDay)
     },
+    createGlide() {
+      const glide = new Glide('.carouselContainer', {
+        type: 'carousel',
+        startAt: 0,
+        perView: 1,
+        animationDuration: 500
+      })
+
+      this.glide = glide
+
+      glide.on(['run'], () => {
+        this.setCurrentDay(glide.index)
+      })
+
+      glide.mount()
+    },
     dayOfWeek: dayOfWeek,
     monthOfYear: monthOfYear
   }
@@ -105,6 +131,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.theme";
 
 /deep/ .v-toolbar__content {
   padding: 0px;

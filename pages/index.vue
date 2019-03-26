@@ -1,6 +1,7 @@
 <template>
   <Grid
     :current-day="currentDay"
+    :current-period="currentPeriod"
     :set-current-day="setCurrentDay"
     :dates="dates"
     :grid="grid"
@@ -14,6 +15,7 @@ import Grid from '../components/grid/Grid'
 
 export default {
   name: 'GridView',
+  auth: false,
   components: {
     Grid
   },
@@ -21,7 +23,8 @@ export default {
     ...mapGetters({
       dates: 'general/dates',
       grid: 'grid/grid',
-      currentDay: 'general/currentDay'
+      currentDay: 'general/currentDay',
+      currentPeriod: 'general/currentPeriod'
     })
   },
   methods: {
