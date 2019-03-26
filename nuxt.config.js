@@ -25,7 +25,7 @@ module.exports = {
         rel: 'stylesheet',
         href:
         "https://fonts.googleapis.com/css?family=Inconsolata|Major+Mono+Display"
-      }
+      },
     ],
     script: [
       { 
@@ -44,7 +44,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '~/assets/style/app.styl'
+    '~/assets/style/app.styl',
   ],
 
   /*
