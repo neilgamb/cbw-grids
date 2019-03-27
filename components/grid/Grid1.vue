@@ -2,7 +2,7 @@
   <div class="gridGlide">
     <div class="glide__track" data-glide-el="track">
       <ul class="glide__slides">
-        <li v-for="date in dates" :key="date.date.toString()" class="day glide__slide">
+        <li v-for="(date, index) in dates" :key="index" class="day glide__slide">
           <GridItem
             v-for="gridItem in grid"
             :key="gridItem.venue.name"
@@ -17,43 +17,35 @@
 
 <script>
 import Glide from '@glidejs/glide'
+import { mapActions, mapGetters } from 'vuex'
 import GridItem from './GridItem'
 
 export default {
-  name: 'Grid',
+  name: 'Grid1',
   components: {
     GridItem
-  },
-  props: {
-    currentDay: { type: Number, default: null },
-    currentPeriod: { type: Number, default: null },
-    setCurrentDay: { type: Function, default: () => 0 },
-    dates: { type: Array, default: () => [] },
-    grid: { type: Array, default: () => [] }
   },
   data() {
     return {
       glide: null
     }
   },
+  computed: {
+    ...mapGetters({
+      dates: 'general/dates',
+      grid: 'grid/grid'
+    })
+  },
   watch: {
     currentDay: function (val) {
       this.glide.go(`=${val}`)
-    },
-    currentPeriod: function () {
-      // if (!this.glide) {
-      //   this.createGlide()
-      // } else {
-      //   this.glide.destroy()
-      //   this.glide = null
-      //   this.createGlide()
-      // }
     }
   },
   mounted() {
     this.createGlide()
   },
   methods: {
+    ...mapActions({ setCurrentDay: 'general/setCurrentDay' }),
     createGlide() {
       const glide = new Glide('.gridGlide', {
         type: 'carousel',
@@ -62,7 +54,7 @@ export default {
         animationDuration: 500
       })
 
-      // this.glide = glide
+      this.glide = glide
 
       glide.on(['run'], () => {
         this.setCurrentDay(glide.index)
@@ -80,15 +72,10 @@ export default {
 
 .day {
   box-sizing: border-box;
-  // width: 100vw;
 }
 
 .gridItem {
   display: flex;
   border-bottom: 3px solid white;
 }
-
-// .grid >>> .VueCarousel-wrapper {
-//   overflow-y: auto;
-// }
 </style>

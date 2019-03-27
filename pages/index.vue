@@ -1,34 +1,22 @@
 <template>
-  <Grid
-    :current-day="currentDay"
+  <GridContainer
     :current-period="currentPeriod"
-    :set-current-day="setCurrentDay"
-    :dates="dates"
-    :grid="grid"
     class="gridViewContainer"
   />
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import Grid from '../components/grid/Grid'
+import { mapGetters } from 'vuex'
+import GridContainer from '../components/grid/GridContainer'
 
 export default {
   name: 'GridView',
   auth: false,
   components: {
-    Grid
+    GridContainer
   },
   computed: {
-    ...mapGetters({
-      dates: 'general/dates',
-      grid: 'grid/grid',
-      currentDay: 'general/currentDay',
-      currentPeriod: 'general/currentPeriod'
-    })
-  },
-  methods: {
-    ...mapActions({ setCurrentDay: 'general/setCurrentDay' })
+    ...mapGetters({ currentPeriod: 'general/currentPeriod' })
   }
 }
 </script>

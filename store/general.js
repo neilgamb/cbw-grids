@@ -41,5 +41,6 @@ export const mutations = {
   },
   setCurrentPeriod(state, period) {
     state.currentPeriod = period
+    state.currentDay = 0
   }
 }

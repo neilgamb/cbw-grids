@@ -19,7 +19,11 @@
         <v-icon>keyboard_arrow_right</v-icon>
       </v-btn>
     </div>
-    <div class="carouselContainer">
+    <DateSliderContainer
+      :current-period="currentPeriod"
+      class="dateSliderContainer"
+    />
+    <!-- <div class="carouselContainer">
       <div class="dateGlide">
         <div class="glide__track" data-glide-el="track">
           <ul class="glide__slides">
@@ -39,60 +43,36 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> -->
   </v-toolbar>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import Glide from '@glidejs/glide'
-import { dayOfWeek, monthOfYear } from '../assets/helpers'
+// import { dayOfWeek, monthOfYear } from '../assets/helpers'
+import DateSliderContainer from './dateSlider/DateSliderContainer'
 
 export default {
-  data() {
-    return {
-      glide: null
-    }
+  components: {
+    DateSliderContainer
   },
   computed: {
     ...mapGetters({
       open: 'general/drawer',
-      dates: 'general/dates',
-      currentDay: 'general/currentDay',
       currentPeriod: 'general/currentPeriod'
     }),
     isMobile() {
       return window.innerWidth < 1024
     }
   },
-  watch: {
-    currentDay: function (val) {
-      this.glide.go(`=${val}`)
-    },
-    currentPeriod: function () {
-      if (!this.glide) {
-        this.createGlide()
-      } else {
-        this.glide.destroy()
-        this.glide = null
-      }
-    }
-  },
-  mounted() {
-    this.createGlide()
-  },
   methods: {
     ...mapActions({
       openDrawer: 'general/openDrawer',
-      closeDrawer: 'general/closeDrawer',
-      setCurrentDay: 'general/setCurrentDay'
+      closeDrawer: 'general/closeDrawer'
     }),
     handleDrawerToggle() {
       const { open } = this
       open ? this.closeDrawer() : this.openDrawer()
-    },
-    getDates(dates, period) {
-      return dates.filter(date => date.period === period)
     },
     currentDayDown() {
       const { currentDay } = this
@@ -112,33 +92,14 @@ export default {
 
       newDay++
       this.setCurrentDay(newDay)
-    },
-    createGlide() {
-      const glide = new Glide('.dateGlide', {
-        type: 'carousel',
-        startAt: 0,
-        perView: 1,
-        animationDuration: 500
-      })
-
-      this.glide = glide
-
-      glide.on(['run'], () => {
-        this.setCurrentDay(glide.index)
-      })
-
-      glide.mount()
-    },
-    dayOfWeek: dayOfWeek,
-    monthOfYear: monthOfYear
+    }
+    // dayOfWeek: dayOfWeek,
+    // monthOfYear: monthOfYear
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
-@import "node_modules/@glidejs/glide/src/assets/sass/glide.theme";
-
 /deep/ .v-toolbar__content {
   padding: 0px;
 }
@@ -157,36 +118,8 @@ export default {
   display: flex;
 }
 
-.carouselContainer {
+.dateSliderContainer {
   width: 40%;
   max-width: 200px;
-
-  .date-container {
-    display: flex;
-    justify-content: space-around;
-
-    .day-of-week {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-    }
-
-    .calendar-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      .month {
-        font-size: 14px;
-      }
-
-      .day {
-        font-size: 20px;
-        line-height: 20px;
-      }
-    }
-  }
 }
 </style>
