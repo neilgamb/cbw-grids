@@ -20,22 +20,24 @@
       </v-btn>
     </div>
     <div class="carouselContainer">
-      <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides">
-          <li v-for="date in dates" :key="date.date.toString()" class="date-container glide__slide">
-            <div class="day-of-week">
-              {{ dayOfWeek(date.date).toLowerCase() }}
-            </div>
-            <div class="calendar-container">
-              <div class="month">
-                {{ monthOfYear(date.date).toLowerCase() }}
+      <div class="dateGlide">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+            <li v-for="date in dates" :key="date.date.toString()" class="date-container glide__slide">
+              <div class="day-of-week">
+                {{ dayOfWeek(date.date).toLowerCase() }}
               </div>
-              <div class="day">
-                {{ date.date.getDate() }}
+              <div class="calendar-container">
+                <div class="month">
+                  {{ monthOfYear(date.date).toLowerCase() }}
+                </div>
+                <div class="day">
+                  {{ date.date.getDate() }}
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </v-toolbar>
@@ -68,9 +70,12 @@ export default {
       this.glide.go(`=${val}`)
     },
     currentPeriod: function () {
-      if (!this.glide) this.createGlide()
-      this.glide.destroy()
-      this.glide = null
+      if (!this.glide) {
+        this.createGlide()
+      } else {
+        this.glide.destroy()
+        this.glide = null
+      }
     }
   },
   mounted() {
@@ -109,7 +114,7 @@ export default {
       this.setCurrentDay(newDay)
     },
     createGlide() {
-      const glide = new Glide('.carouselContainer', {
+      const glide = new Glide('.dateGlide', {
         type: 'carousel',
         startAt: 0,
         perView: 1,

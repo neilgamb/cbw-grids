@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="gridGlide">
     <div class="glide__track" data-glide-el="track">
       <ul class="glide__slides">
         <li v-for="date in dates" :key="date.date.toString()" class="day glide__slide">
@@ -41,9 +41,13 @@ export default {
       this.glide.go(`=${val}`)
     },
     currentPeriod: function () {
-      if (!this.glide) this.createGlide()
-      this.glide.destroy()
-      this.glide = null
+      // if (!this.glide) {
+      //   this.createGlide()
+      // } else {
+      //   this.glide.destroy()
+      //   this.glide = null
+      //   this.createGlide()
+      // }
     }
   },
   mounted() {
@@ -51,14 +55,14 @@ export default {
   },
   methods: {
     createGlide() {
-      const glide = new Glide('.gridViewContainer', {
+      const glide = new Glide('.gridGlide', {
         type: 'carousel',
         startAt: 0,
         perView: 1,
         animationDuration: 500
       })
 
-      this.glide = glide
+      // this.glide = glide
 
       glide.on(['run'], () => {
         this.setCurrentDay(glide.index)
@@ -76,6 +80,7 @@ export default {
 
 .day {
   box-sizing: border-box;
+  // width: 100vw;
 }
 
 .gridItem {
