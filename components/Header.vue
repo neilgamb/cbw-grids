@@ -23,33 +23,11 @@
       :current-period="currentPeriod"
       class="dateSliderContainer"
     />
-    <!-- <div class="carouselContainer">
-      <div class="dateGlide">
-        <div class="glide__track" data-glide-el="track">
-          <ul class="glide__slides">
-            <li v-for="date in dates" :key="date.date.toString()" class="date-container glide__slide">
-              <div class="day-of-week">
-                {{ dayOfWeek(date.date).toLowerCase() }}
-              </div>
-              <div class="calendar-container">
-                <div class="month">
-                  {{ monthOfYear(date.date).toLowerCase() }}
-                </div>
-                <div class="day">
-                  {{ date.date.getDate() }}
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div> -->
   </v-toolbar>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-// import { dayOfWeek, monthOfYear } from '../assets/helpers'
 import DateSliderContainer from './dateSlider/DateSliderContainer'
 
 export default {
@@ -93,8 +71,6 @@ export default {
       newDay++
       this.setCurrentDay(newDay)
     }
-    // dayOfWeek: dayOfWeek,
-    // monthOfYear: monthOfYear
   }
 }
 </script>
