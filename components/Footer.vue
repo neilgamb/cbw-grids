@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Footer',
@@ -37,11 +37,14 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      currentPeriod: 'general/currentPeriod'
+    }),
     color() {
-      switch (this.bottomNav) {
-        case 0: return '#212121'
-        case 1: return '#212121'
-        case 2: return '#212121'
+      switch (this.currentPeriod) {
+        case 0: return '#38203C'
+        case 1: return '#98751c'
+        case 2: return '#345633'
         default: return null
       }
     }
@@ -66,7 +69,7 @@ export default {
       max-width: none;
 
       span {
-        font-size: 16px;
+        font-size: 18px;
       }
     }
   }

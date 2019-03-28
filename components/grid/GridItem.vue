@@ -39,7 +39,7 @@ export default {
   }
 
   .events {
-    flex: 4;
+    flex: 3;
     display: flex;
     justify-content: center;
     align-items: center;

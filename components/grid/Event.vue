@@ -4,6 +4,9 @@
     :class="{ eventSelected: eventSelected }"
     @click="eventSelected = !eventSelected"
   >
+    <v-icon v-if="eventSelected">
+      favorite
+    </v-icon>
     <div class="band-container">
       <div class="band">
         {{ event.event.band }}
@@ -103,7 +106,6 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    // max-width: 500px;
 
     .time,
     .price,
@@ -113,6 +115,7 @@ export default {
       justify-content: center;
       flex: 1;
       font-size: 16px;
+      max-width: 150px;
 
       i {
         font-size: 18px;
