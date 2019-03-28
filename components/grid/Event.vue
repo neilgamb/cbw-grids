@@ -1,10 +1,10 @@
 <template>
+  <!-- below will need :class="{ eventFavorited: eventFavorited }" -->
   <div
     class="event"
-    :class="{ eventSelected: eventSelected }"
-    @click="eventSelected = !eventSelected"
+    @click="toggleEventFavorite"
   >
-    <v-icon v-if="eventSelected">
+    <v-icon v-if="event.event.eventFavorited">
       favorite
     </v-icon>
     <div class="band-container">
@@ -48,7 +48,6 @@ export default {
   },
   data() {
     return {
-      eventSelected: false,
       venue: null
     }
   },
@@ -62,6 +61,9 @@ export default {
   methods: {
     eventTime: function (date) {
       return moment(date).format('h:mm a')
+    },
+    toggleEventFavorite() {
+      console.log(this.event) // eslint-disable-line
     }
   }
 }
