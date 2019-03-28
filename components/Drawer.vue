@@ -1,29 +1,13 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
+    class="drawerContainer"
     clipped
     fixed
     width="200"
     app
   >
     <v-list>
-      <v-list-tile to="/" router exact>
-        <v-list-tile-action>
-          <v-icon>grid_on</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>The Gridz</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-      <v-list-tile to="/map" router exact>
-        <v-list-tile-action>
-          <v-icon>public</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>The Map</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-
       <v-list-tile v-if="loggedIn" to="/profile" router exact>
         <v-list-tile-action>
           <v-avatar size="35">
@@ -31,7 +15,31 @@
           </v-avatar>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>My Grids</v-list-tile-title>
+          <v-list-tile-title class="navItem">
+            My Grids
+          </v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+
+      <v-list-tile to="/" router exact>
+        <v-list-tile-action>
+          <v-icon>grid_on</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title class="navItem">
+            Grids
+          </v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+
+      <v-list-tile to="/map" router exact>
+        <v-list-tile-action>
+          <v-icon>public</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title class="navItem">
+            Map
+          </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
 
@@ -40,7 +48,9 @@
           <v-icon>exit_to_app</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Sign In</v-list-tile-title>
+          <v-list-tile-title class="navItem">
+            Sign In
+          </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
 
@@ -49,7 +59,9 @@
           <v-icon>exit_to_app</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Logout</v-list-tile-title>
+          <v-list-tile-title class="navItem">
+            Log Out
+          </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
@@ -91,3 +103,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.drawerContainer {
+  // border-right: 3px solid white;
+  // border-top: 3px solid white;
+  background: #212121;
+
+  .navItem {
+    font-size: 24px;
+  }
+}
+</style>

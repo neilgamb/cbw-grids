@@ -1,5 +1,9 @@
 <template>
-  <div class="event">
+  <div
+    class="event"
+    :class="{ eventSelected: eventSelected }"
+    @click="eventSelected = !eventSelected"
+  >
     <div class="band-container">
       <div class="band">
         {{ event.event.band }}
@@ -41,7 +45,7 @@ export default {
   },
   data() {
     return {
-      dialog: false,
+      eventSelected: false,
       venue: null
     }
   },
@@ -67,6 +71,7 @@ export default {
   flex-direction: column;
   box-sizing: border-box;
   padding: 10px;
+  transition: 200ms;
 
   .band-container {
     flex: 4;
@@ -115,5 +120,10 @@ export default {
       }
     }
   }
+}
+
+.eventSelected {
+  filter: invert(100%);
+  background: black;
 }
 </style>

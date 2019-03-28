@@ -37,7 +37,8 @@ export default {
   computed: {
     ...mapGetters({
       open: 'general/drawer',
-      currentPeriod: 'general/currentPeriod'
+      currentPeriod: 'general/currentPeriod',
+      currentDay: 'general/currentDay'
     }),
     isMobile() {
       return window.innerWidth < 1024
@@ -46,7 +47,8 @@ export default {
   methods: {
     ...mapActions({
       openDrawer: 'general/openDrawer',
-      closeDrawer: 'general/closeDrawer'
+      closeDrawer: 'general/closeDrawer',
+      setCurrentDay: 'general/setCurrentDay'
     }),
     handleDrawerToggle() {
       const { open } = this
