@@ -76,9 +76,9 @@ module.exports = {
   auth: {
     strategies: {
         google: {
-          client_id: '33548211507-co26ggfunuc7ao5fcdah6fl46mvknpgp.apps.googleusercontent.com',
+          client_id: '33548211507-2dpibnjo0kpg9vahcrltqfjvlis02vsv.apps.googleusercontent.com',
         },
-    }
+    },
   },
 
   /*

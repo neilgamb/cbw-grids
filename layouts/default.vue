@@ -41,6 +41,7 @@ export default {
   mounted() {
     this.getEvents()
     this.getVenues()
+    this.userValidate()
   },
   methods: {
     ...mapActions({
@@ -112,6 +113,9 @@ export default {
         })
       })
       this.setGrid(grid)
+    },
+    userValidate() {
+      console.log(this.$auth) // eslint-disable-line
     }
   }
 }
