@@ -15,6 +15,7 @@ import moment from 'moment'
 import { getFestDay } from '../assets/helpers'
 import VenueService from '../server/services/VenueService'
 import EventService from '../server/services/EventService'
+import UserService from '../server/services/UserService'
 import Header from '../components/Header'
 import Drawer from '../components/Drawer'
 import Footer from '../components/Footer'
@@ -25,6 +26,11 @@ export default {
     Header,
     Drawer,
     Footer
+  },
+  data() {
+    return {
+      users: null
+    }
   },
   computed: {
     ...mapGetters({
@@ -114,8 +120,23 @@ export default {
       })
       this.setGrid(grid)
     },
-    userValidate() {
-      console.log(this.$auth) // eslint-disable-line
+    async getUsers() {
+      const users = await UserService.getUsers()
+      this.users = users
+    },
+    async userValidate() {
+      if (this.$auth.$state.loggedIn) {
+        console.log('logged in, check to see if user in DB') // eslint-disable-line
+
+        const users = await UserService.getUsers()
+
+        if (users.some(e => e.sub === this.$auth.$state.user.sub)) {
+          console.log('user already in DB, load favorited events') // eslint-disable-line
+        } else {
+          console.log('add user to DB', this.$auth.$state.user) // eslint-disable-line
+          await UserService.insertUser(this.$auth.$state.user)
+        }
+      }
     }
   }
 }

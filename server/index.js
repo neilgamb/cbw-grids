@@ -1,7 +1,12 @@
 const express = require('express')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+
 const app = express()
+app.use(bodyParser.json())
+app.use(cors())
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
@@ -18,6 +23,9 @@ async function start() {
 
   const venues = require('./routes/venues')
   app.use('/venues', venues)
+
+  const users = require('./routes/users')
+  app.use('/users', users)
 
   // Build only in dev mode
   if (config.dev) {
