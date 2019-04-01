@@ -1,5 +1,4 @@
 <template>
-  <!-- below will need :class="{ eventFavorited: eventFavorited }" -->
   <div
     class="event"
     @click="toggleEventFavorite"
@@ -38,7 +37,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import moment from 'moment'
 
 export default {
@@ -52,18 +51,37 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ venues: 'grid/venues' })
+    ...mapGetters({
+      venues: 'grid/venues',
+      favorites: 'general/favorites'
+    })
   },
   mounted() {
     const { event, venues } = this
     this.venue = venues.find(venue => venue.venue.id === event.event.venue).venue
   },
   methods: {
+    ...mapActions({
+      setFavorites: 'general/setFavorites'
+    }),
     eventTime: function (date) {
       return moment(date).format('h:mm a')
     },
     toggleEventFavorite() {
-      console.log(this.event) // eslint-disable-line
+      if (this.$auth.$state.loggedIn) {
+        const favorites = this.favorites.slice()
+
+        const favoriteEventIndex = favorites.findIndex(e => e._id === this.event._id)
+        const favoriteEvent = favoriteEventIndex >= 0
+
+        if (favoriteEvent) {
+          favorites.splice(favoriteEventIndex, 1)
+        } else if (!favoriteEvent) {
+          favorites.push(this.event)
+        }
+
+        this.setFavorites(favorites)
+      }
     }
   }
 }
@@ -127,8 +145,8 @@ export default {
   }
 }
 
-.eventSelected {
-  filter: invert(100%);
-  background: black;
-}
+// .eventFavorited {
+//   filter: invert(100%);
+//   background: black;
+// }
 </style>

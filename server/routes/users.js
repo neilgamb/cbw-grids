@@ -9,7 +9,6 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const users = await loadUsersCollection()
-  console.log(req)
   await users.insertOne({
     user: req.body.text,
     createdAt: new Date()

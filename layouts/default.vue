@@ -53,7 +53,8 @@ export default {
     ...mapActions({
       setEvents: 'grid/setEvents',
       setVenues: 'grid/setVenues',
-      setGrid: 'grid/setGrid'
+      setGrid: 'grid/setGrid',
+      setFavorites: 'general/setFavorites'
     }),
     async getEvents() {
       try {
@@ -126,15 +127,19 @@ export default {
     },
     async userValidate() {
       if (this.$auth.$state.loggedIn) {
-        console.log('logged in, check to see if user in DB') // eslint-disable-line
-
         const users = await UserService.getUsers()
+        const existsInDB = users.find(e => e.user.sub === this.$auth.$state.user.sub)
 
-        if (users.some(e => e.sub === this.$auth.$state.user.sub)) {
-          console.log('user already in DB, load favorited events') // eslint-disable-line
-        } else {
-          console.log('add user to DB', this.$auth.$state.user) // eslint-disable-line
-          await UserService.insertUser(this.$auth.$state.user)
+        if (existsInDB) {
+          // user already in DB, load user's favorites into state
+          this.setFavorites(existsInDB.user.favorites)
+        } else if (!existsInDB) {
+          // user not in DB yet, add to DB
+          const user = {
+            ...this.$auth.$state.user,
+            favorites: []
+          }
+          await UserService.insertUser(user)
         }
       }
     }

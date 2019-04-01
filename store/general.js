@@ -4,14 +4,16 @@ export const state = () => ({
   drawer: false,
   currentDay: 0,
   currentPeriod: 0,
-  dates: dates.festDays
+  dates: dates.festDays,
+  favorites: null
 })
 
 export const getters = {
   drawer: state => state.drawer,
   currentDay: state => state.currentDay,
   currentPeriod: state => state.currentPeriod,
-  dates: state => state.dates.filter(date => date.period === state.currentPeriod)
+  dates: state => state.dates.filter(date => date.period === state.currentPeriod),
+  favorites: state => state.favorites
 }
 
 export const actions = {
@@ -26,6 +28,9 @@ export const actions = {
   },
   setCurrentPeriod({ commit }, period) {
     commit('setCurrentPeriod', period)
+  },
+  setFavorites({ commit }, favorites) {
+    commit('setFavorites', favorites)
   }
 }
 
@@ -42,5 +47,8 @@ export const mutations = {
   setCurrentPeriod(state, period) {
     state.currentPeriod = period
     state.currentDay = 0
+  },
+  setFavorites(state, favorites) {
+    state.favorites = favorites
   }
 }

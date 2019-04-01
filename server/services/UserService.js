@@ -27,6 +27,10 @@ class UserService {
   static deleteUser(id) {
     return axios.delete(`${url}${id}`)
   }
+
+  static updateUser(id, text) {
+    return axios.put(`${url}${id}`, { text })
+  }
 }
 
 export default UserService

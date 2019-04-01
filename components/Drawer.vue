@@ -92,13 +92,15 @@ export default {
   methods: {
     ...mapActions({
       openDrawer: 'general/openDrawer',
-      closeDrawer: 'general/closeDrawer'
+      closeDrawer: 'general/closeDrawer',
+      setFavorites: 'general/setFavorites'
     }),
     login() {
       this.$auth.loginWith('google')
     },
     logout() {
       this.$auth.logout()
+      this.setFavorites(null)
     }
   }
 }
@@ -106,8 +108,6 @@ export default {
 
 <style lang="scss" scoped>
 .drawerContainer {
-  // border-right: 3px solid white;
-  // border-top: 3px solid white;
   background: #212121;
 
   .navItem {
