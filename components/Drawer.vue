@@ -100,7 +100,7 @@ export default {
     },
     logout() {
       this.$auth.logout()
-      this.setFavorites(null)
+      this.setFavorites([])
     }
   }
 }

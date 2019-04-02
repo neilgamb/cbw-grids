@@ -36,12 +36,25 @@ export default {
     ...mapGetters({
       dates: 'general/dates',
       venues: 'grid/venues',
-      events: 'grid/events'
+      events: 'grid/events',
+      favorites: 'general/favorites'
     })
   },
   watch: {
     events: function () {
       this.buildGrid()
+    },
+    favorites: async function (val) {
+      if (this.$auth.$state.loggedIn) {
+        // find user
+        const users = await UserService.getUsers()
+        const user = users.find(e => e.user.sub === this.$auth.$state.user.sub)
+
+        const favorites = []
+        val.map(fav => favorites.push(fav._id))
+
+        UserService.updateUser(user._id, favorites)
+      }
     }
   },
   mounted() {

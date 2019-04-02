@@ -5,7 +5,7 @@ export const state = () => ({
   currentDay: 0,
   currentPeriod: 0,
   dates: dates.festDays,
-  favorites: null
+  favorites: []
 })
 
 export const getters = {

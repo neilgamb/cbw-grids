@@ -1,6 +1,7 @@
 <template>
   <div
     class="event"
+    :class="{eventFavorited: eventFavorited}"
     @click="toggleEventFavorite"
   >
     <v-icon v-if="event.event.eventFavorited">
@@ -27,10 +28,13 @@
         <v-icon>attach_money</v-icon>
         {{ event.event.price }}
       </div>
-      <div v-if="event.event.price" class="tickets">
+      <div v-if="event.event.tix" class="tickets">
         <v-btn style="font-size: 16px" small outline target="_blank" :href="`${event.event.tix}`">
           Tix
         </v-btn>
+      </div>
+      <div v-else>
+        <i>Tix at door</i>
       </div>
     </div>
   </div>
@@ -54,7 +58,11 @@ export default {
     ...mapGetters({
       venues: 'grid/venues',
       favorites: 'general/favorites'
-    })
+    }),
+    eventFavorited() {
+      const { favorites } = this
+      return favorites && favorites.some(e => e._id === this.event._id)
+    }
   },
   mounted() {
     const { event, venues } = this
@@ -70,16 +78,9 @@ export default {
     toggleEventFavorite() {
       if (this.$auth.$state.loggedIn) {
         const favorites = this.favorites.slice()
-
         const favoriteEventIndex = favorites.findIndex(e => e._id === this.event._id)
         const favoriteEvent = favoriteEventIndex >= 0
-
-        if (favoriteEvent) {
-          favorites.splice(favoriteEventIndex, 1)
-        } else if (!favoriteEvent) {
-          favorites.push(this.event)
-        }
-
+        favoriteEvent ? favorites.splice(favoriteEventIndex, 1) : favorites.push(this.event)
         this.setFavorites(favorites)
       }
     }
@@ -145,8 +146,8 @@ export default {
   }
 }
 
-// .eventFavorited {
-//   filter: invert(100%);
-//   background: black;
-// }
+.eventFavorited {
+  filter: invert(100%);
+  background: black;
+}
 </style>
