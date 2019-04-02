@@ -61,7 +61,7 @@ export default {
     }),
     eventFavorited() {
       const { favorites } = this
-      return favorites && favorites.some(e => e._id === this.event._id)
+      return favorites && favorites.some(e => e === this.event._id)
     }
   },
   mounted() {
@@ -78,9 +78,9 @@ export default {
     toggleEventFavorite() {
       if (this.$auth.$state.loggedIn) {
         const favorites = this.favorites.slice()
-        const favoriteEventIndex = favorites.findIndex(e => e._id === this.event._id)
+        const favoriteEventIndex = favorites.findIndex(e => e === this.event._id)
         const favoriteEvent = favoriteEventIndex >= 0
-        favoriteEvent ? favorites.splice(favoriteEventIndex, 1) : favorites.push(this.event)
+        favoriteEvent ? favorites.splice(favoriteEventIndex, 1) : favorites.push(this.event._id)
         this.setFavorites(favorites)
       }
     }

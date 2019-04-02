@@ -18,7 +18,6 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   const users = await loadUsersCollection()
-  console.log(req.body.text)
   await users.updateOne(
     { _id: new mongodb.ObjectId(req.params.id) },
     { $set: { "user.favorites" : req.body.text } }

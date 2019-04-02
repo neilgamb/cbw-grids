@@ -51,7 +51,7 @@ export default {
         const user = users.find(e => e.user.sub === this.$auth.$state.user.sub)
 
         const favorites = []
-        val.map(fav => favorites.push(fav._id))
+        val.map(fav => favorites.push(fav))
 
         UserService.updateUser(user._id, favorites)
       }
