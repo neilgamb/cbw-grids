@@ -21,24 +21,24 @@
         </v-list-tile-content>
       </v-list-tile>
 
+      <v-list-tile v-if="loggedIn" to="/map" router exact>
+        <v-list-tile-action>
+          <v-icon>public</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title class="navItem">
+            My Map
+          </v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+
       <v-list-tile to="/" router exact>
         <v-list-tile-action>
           <v-icon>grid_on</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title class="navItem">
-            Grids
-          </v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-
-      <v-list-tile to="/map" router exact>
-        <v-list-tile-action>
-          <v-icon>public</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title class="navItem">
-            Map
+            {{ loggedIn ? "All Grids" : "Grid" }}
           </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
