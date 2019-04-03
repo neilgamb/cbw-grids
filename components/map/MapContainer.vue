@@ -23,7 +23,8 @@ export default {
       currentPeriod: 'general/currentPeriod',
       venues: 'grid/venues',
       events: 'grid/events',
-      dates: 'general/dates'
+      dates: 'general/dates',
+      favorites: 'general/favorites'
     })
   },
   watch: {
@@ -65,7 +66,7 @@ export default {
       this.map = map
     },
     getEventsForMap() {
-      const { currentDay, dates, events, venues } = this
+      const { currentDay, dates, events, venues, favorites } = this
       const currentDate = dates[currentDay].date
       const eventsForMap = []
       if (!venues.length) return null
@@ -79,7 +80,10 @@ export default {
           eventDate = moment(eventDate).subtract(1, 'days')
         }
 
-        if (moment(eventDate).isSame(currentDate, 'day')) {
+        if (
+          moment(eventDate).isSame(currentDate, 'day') &&
+          favorites.some(fav => fav === e._id)
+        ) {
           eventsForMap.push(e.event)
         }
       })
