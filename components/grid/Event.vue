@@ -113,13 +113,13 @@ export default {
     }
   }
 
-  .iconContainer.active {
-    animation: move 1s cubic-bezier(0.99, -0.11, 0.75, 0.72) 0s 1 normal;
+  // .iconContainer.active {
+  //   animation: move 1s cubic-bezier(0.99, -0.11, 0.75, 0.72) 0s 1 normal;
 
-    .favoriteIcon {
-      animation: shake 1s ease 0s 1 normal;
-    }
-  }
+  //   .favoriteIcon {
+  //     animation: shake 1s ease 0s 1 normal;
+  //   }
+  // }
 
   .band-container {
     flex: 4;
@@ -179,14 +179,14 @@ export default {
   }
 }
 
-@keyframes shake {
-    0% { transform: translateX(10px); }
-    50% { transform: translateX(-10px); }
-    100% { transform: translateX(10px); }
-}
+// @keyframes shake {
+//     0% { transform: translateX(10px); }
+//     50% { transform: translateX(-10px); }
+//     100% { transform: translateX(10px); }
+// }
 
-@keyframes move {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-500px); opacity: 0; }
-}
+// @keyframes move {
+//     0% { transform: translateY(0px); }
+//     100% { transform: translateY(-500px); opacity: 0; }
+// }
 </style>
