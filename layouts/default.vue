@@ -99,7 +99,7 @@ export default {
     },
     buildGrid() {
       const { dates, events, venues, favorites } = this
-      const isFav = this.$auth.state.loggedIn && this.$route.name === 'profile'
+      const onMyGrids = this.$auth.state.loggedIn && this.$route.name === 'profile'
       const grid = []
 
       // for each venue...
@@ -126,7 +126,7 @@ export default {
             if (
               event.event.venue === venue.venue.id &&
               moment(eventDate).isSame(date.date, 'day') &&
-              (isFav ? favorites.some(fav => fav === event._id) : true)
+              (onMyGrids ? favorites.some(fav => fav === event._id) : true)
             ) {
               gridItem.events.push(event)
               gridItem.day = getFestDay(eventDate)

@@ -3,12 +3,14 @@
     <div class="glide__track" data-glide-el="track">
       <ul class="glide__slides">
         <li v-for="(date, index) in dates" :key="index" class="day glide__slide">
-          <GridItem
-            v-for="gridItem in grid"
-            :key="gridItem.venue.name"
-            :grid-item="gridItem"
-            class="gridItem"
-          />
+          <div v-if="currentDay === index">
+            <GridItem
+              v-for="gridItem in grid"
+              :key="gridItem.venue.name"
+              :grid-item="gridItem"
+              class="gridItem"
+            />
+          </div>
         </li>
       </ul>
     </div>
@@ -33,6 +35,7 @@ export default {
   computed: {
     ...mapGetters({
       dates: 'general/dates',
+      currentDay: 'general/currentDay',
       grid: 'grid/grid'
     })
   },

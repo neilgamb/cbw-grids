@@ -9,7 +9,7 @@
   >
     <v-toolbar-title class="titleContainer">
       <v-toolbar-side-icon @click="handleDrawerToggle" />
-      <h1>grids</h1>
+      <h1>cbw gridz</h1>
     </v-toolbar-title>
     <div v-if="!isMobile" class="manualDateNav">
       <v-btn icon color="primary darken-2" @click="currentDayDown">

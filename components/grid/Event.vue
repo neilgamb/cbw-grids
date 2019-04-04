@@ -2,13 +2,15 @@
   <div
     class="event"
     :class="{eventFavorited: eventFavorited}"
-    @click="toggleEventFavorite"
+    @click="handleEventClick"
   >
     <div class="iconContainer" :class="{active: eventFavorited}">
       <v-icon class="favoriteIcon">
         favorite
       </v-icon>
     </div>
+
+    <EventDetail :event="event" :open="detailOpen" />
 
     <div class="band-container">
       <div class="band">
@@ -46,15 +48,20 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import moment from 'moment'
+import EventDetail from './EventDetail'
 
 export default {
   name: 'Event',
+  components: {
+    EventDetail
+  },
   props: {
     event: { type: Object, default: () => {} }
   },
   data() {
     return {
-      venue: null
+      venue: null,
+      detailOpen: false
     }
   },
   computed: {
@@ -78,14 +85,25 @@ export default {
     eventTime: function (date) {
       return moment(date).format('h:mm a')
     },
-    toggleEventFavorite() {
-      if (this.$auth.$state.loggedIn && this.$route.name === 'index') {
-        const favorites = this.favorites.slice()
-        const favoriteEventIndex = favorites.findIndex(e => e === this.event._id)
-        const favoriteEvent = favoriteEventIndex >= 0
-        favoriteEvent ? favorites.splice(favoriteEventIndex, 1) : favorites.push(this.event._id)
-        this.setFavorites(favorites)
+    handleEventClick() {
+      if (
+        this.$auth.$state.loggedIn &&
+        this.$route.name === 'index'
+      ) {
+        this.toggleEventFavorite()
+      } else {
+        this.openEventDetail()
       }
+    },
+    toggleEventFavorite() {
+      const favorites = this.favorites.slice()
+      const favoriteEventIndex = favorites.findIndex(e => e === this.event._id)
+      const favoriteEvent = favoriteEventIndex >= 0
+      favoriteEvent ? favorites.splice(favoriteEventIndex, 1) : favorites.push(this.event._id)
+      this.setFavorites(favorites)
+    },
+    openEventDetail() {
+      console.log('open event detail modal')  // eslint-disable-line
     }
   }
 }
