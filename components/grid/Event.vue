@@ -10,7 +10,13 @@
       </v-icon>
     </div>
 
-    <EventDetail :event="event" :open="detailOpen" />
+    <EventDetail
+      v-if="this.$auth.loggedIn && this.$route.name === 'profile'"
+      :event="event"
+      :venue="venue"
+      :event-detail-open="eventDetailOpen"
+      :close-event-detail="closeEventDetail"
+    />
 
     <div class="band-container">
       <div class="band">
@@ -34,7 +40,7 @@
         {{ event.event.price }}
       </div>
       <div v-if="event.event.tix" class="tickets">
-        <v-btn style="font-size: 16px" small outline target="_blank" :href="`${event.event.tix}`">
+        <v-btn style="font-size: 16px" small outline target="_blank" @click.stop="openTixLink(event.event.tix)">
           Tix
         </v-btn>
       </div>
@@ -61,7 +67,7 @@ export default {
   data() {
     return {
       venue: null,
-      detailOpen: false
+      eventDetailOpen: false
     }
   },
   computed: {
@@ -103,7 +109,13 @@ export default {
       this.setFavorites(favorites)
     },
     openEventDetail() {
-      console.log('open event detail modal')  // eslint-disable-line
+      this.eventDetailOpen = true
+    },
+    closeEventDetail() {
+      this.eventDetailOpen = false
+    },
+    openTixLink(link) {
+      window.open(link, '_blank')
     }
   }
 }

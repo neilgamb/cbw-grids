@@ -99,7 +99,7 @@ export default {
     },
     buildGrid() {
       const { dates, events, venues, favorites } = this
-      const onMyGrids = this.$auth.state.loggedIn && this.$route.name === 'profile'
+      const onMyGrids = this.$auth.loggedIn && this.$route.name === 'profile'
       const grid = []
 
       // for each venue...
