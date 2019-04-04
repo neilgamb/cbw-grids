@@ -37,7 +37,8 @@ export default {
       dates: 'general/dates',
       venues: 'grid/venues',
       events: 'grid/events',
-      favorites: 'general/favorites'
+      favorites: 'general/favorites',
+      grid: 'grid/grid'
     })
   },
   watch: {
@@ -55,6 +56,9 @@ export default {
 
         UserService.updateUser(user._id, favorites)
       }
+    },
+    $route() {
+      if (this.$route.name === 'profile') this.buildGrid()
     }
   },
   mounted() {
@@ -67,7 +71,8 @@ export default {
       setEvents: 'grid/setEvents',
       setVenues: 'grid/setVenues',
       setGrid: 'grid/setGrid',
-      setFavorites: 'general/setFavorites'
+      setFavorites: 'general/setFavorites',
+      setFavGrid: 'grid/setFavGrid'
     }),
     async getEvents() {
       try {
@@ -90,7 +95,8 @@ export default {
       })
     },
     buildGrid() {
-      const { dates, events, venues } = this
+      const { dates, events, venues, favorites } = this
+      const isFav = this.$auth.state.loggedIn && this.$route.name === 'profile'
       const grid = []
 
       // for each venue...
@@ -113,11 +119,11 @@ export default {
             if (eventDate.getHours() < 12) {
               eventDate = moment(eventDate).subtract(1, 'days')
             }
-
             // populate grid item based on date && venue
             if (
               event.event.venue === venue.venue.id &&
-              moment(eventDate).isSame(date.date, 'day')
+              moment(eventDate).isSame(date.date, 'day') &&
+              (isFav ? favorites.some(fav => fav === event._id) : true)
             ) {
               gridItem.events.push(event)
               gridItem.day = getFestDay(eventDate)

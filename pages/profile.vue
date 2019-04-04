@@ -1,14 +1,21 @@
 <template>
-  <v-layout>
-    <v-flex xs12>
-      <v-card>
-        <v-card-title class="headline">
-          Profile Page
-        </v-card-title>
-        <v-card-text>
-          <p>Filtered Grids / Map will go here.  Protected route until auth</p>
-        </v-card-text>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <GridContainer
+    :current-period="currentPeriod"
+    class="gridViewContainer"
+  />
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+import GridContainer from '../components/grid/GridContainer'
+
+export default {
+  name: 'MyGridsView',
+  components: {
+    GridContainer
+  },
+  computed: {
+    ...mapGetters({ currentPeriod: 'general/currentPeriod' })
+  }
+}
+</script>

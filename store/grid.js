@@ -1,13 +1,15 @@
 export const state = () => ({
   venues: [],
   events: [],
-  grid: []
+  grid: [],
+  favGrid: []
 })
 
 export const getters = {
   venues: state => state.venues,
   events: state => state.events,
-  grid: (state, getters, rootState) => state.grid.filter(gridItem => gridItem.period === rootState.general.currentPeriod && gridItem.day === rootState.general.currentDay)
+  grid: (state, getters, rootState) => state.grid.filter(gridItem => gridItem.period === rootState.general.currentPeriod && gridItem.day === rootState.general.currentDay),
+  favGrid: (state, getters, rootState) => state.favGrid.filter(gridItem => gridItem.period === rootState.general.currentPeriod && gridItem.day === rootState.general.currentDay)
 }
 
 export const actions = {
@@ -19,6 +21,9 @@ export const actions = {
   },
   setGrid({ commit }, grid) {
     commit('setGrid', grid)
+  },
+  setFavGrid({ commit }, favGrid) {
+    commit('setFavGrid', favGrid)
   }
 }
 
@@ -31,5 +36,8 @@ export const mutations = {
   },
   setGrid(state, grid) {
     state.grid = grid
+  },
+  setFavGrid(state, favGrid) {
+    state.favGrid = favGrid
   }
 }
