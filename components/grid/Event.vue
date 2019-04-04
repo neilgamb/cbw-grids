@@ -64,7 +64,7 @@ export default {
     }),
     eventFavorited() {
       const { favorites } = this
-      return favorites && favorites.some(e => e === this.event._id)
+      return this.$route.name === 'index' && favorites && favorites.some(e => e === this.event._id)
     }
   },
   mounted() {
@@ -79,7 +79,7 @@ export default {
       return moment(date).format('h:mm a')
     },
     toggleEventFavorite() {
-      if (this.$auth.$state.loggedIn) {
+      if (this.$auth.$state.loggedIn && this.$route.name === 'index') {
         const favorites = this.favorites.slice()
         const favoriteEventIndex = favorites.findIndex(e => e === this.event._id)
         const favoriteEvent = favoriteEventIndex >= 0
@@ -112,14 +112,6 @@ export default {
       font-size: 40px;
     }
   }
-
-  // .iconContainer.active {
-  //   animation: move 1s cubic-bezier(0.99, -0.11, 0.75, 0.72) 0s 1 normal;
-
-  //   .favoriteIcon {
-  //     animation: shake 1s ease 0s 1 normal;
-  //   }
-  // }
 
   .band-container {
     flex: 4;
@@ -178,15 +170,4 @@ export default {
     display: inline;
   }
 }
-
-// @keyframes shake {
-//     0% { transform: translateX(10px); }
-//     50% { transform: translateX(-10px); }
-//     100% { transform: translateX(10px); }
-// }
-
-// @keyframes move {
-//     0% { transform: translateY(0px); }
-//     100% { transform: translateY(-500px); opacity: 0; }
-// }
 </style>

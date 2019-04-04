@@ -58,7 +58,10 @@ export default {
       }
     },
     $route() {
-      if (this.$route.name === 'profile') this.buildGrid()
+      if (
+        this.$route.name === 'profile' ||
+        this.$route.name === 'index'
+      ) this.buildGrid()
     }
   },
   mounted() {
