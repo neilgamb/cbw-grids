@@ -4,9 +4,12 @@
     :class="{eventFavorited: eventFavorited}"
     @click="toggleEventFavorite"
   >
-    <v-icon v-if="event.event.eventFavorited">
-      favorite
-    </v-icon>
+    <div class="iconContainer" :class="{active: eventFavorited}">
+      <v-icon class="favoriteIcon">
+        favorite
+      </v-icon>
+    </div>
+
     <div class="band-container">
       <div class="band">
         {{ event.event.band }}
@@ -96,6 +99,27 @@ export default {
   box-sizing: border-box;
   padding: 10px;
   transition: 200ms;
+  position: relative;
+
+  .iconContainer {
+    display: none;
+    position: absolute;
+    top: 7px;
+    left: -20px;
+
+    .favoriteIcon {
+      color: #172dde;
+      font-size: 40px;
+    }
+  }
+
+  .iconContainer.active {
+    animation: move 1s cubic-bezier(0.99, -0.11, 0.75, 0.72) 0s 1 normal;
+
+    .favoriteIcon {
+      animation: shake 1s ease 0s 1 normal;
+    }
+  }
 
   .band-container {
     flex: 4;
@@ -149,5 +173,20 @@ export default {
 .eventFavorited {
   filter: invert(100%);
   background: black;
+
+  .iconContainer {
+    display: inline;
+  }
+}
+
+@keyframes shake {
+    0% { transform: translateX(10px); }
+    50% { transform: translateX(-10px); }
+    100% { transform: translateX(10px); }
+}
+
+@keyframes move {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-500px); opacity: 0; }
 }
 </style>
