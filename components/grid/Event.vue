@@ -40,7 +40,6 @@
         <i>Tix at door</i>
       </div>
     </div>
-
     <v-dialog
       v-model="dialog"
       max-width="800"
