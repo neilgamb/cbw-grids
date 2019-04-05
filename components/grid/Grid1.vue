@@ -10,6 +10,7 @@
               :grid-item="gridItem"
               class="gridItem"
             />
+            <NoFavMsg v-if="grid.length === 0" />
           </div>
         </li>
       </ul>
@@ -21,11 +22,13 @@
 import Glide from '@glidejs/glide'
 import { mapActions, mapGetters } from 'vuex'
 import GridItem from './GridItem'
+import NoFavMsg from './NoFavMsg'
 
 export default {
   name: 'Grid1',
   components: {
-    GridItem
+    GridItem,
+    NoFavMsg
   },
   data() {
     return {

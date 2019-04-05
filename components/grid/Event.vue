@@ -6,7 +6,7 @@
   >
     <div class="iconContainer" :class="{active: eventFavorited}">
       <v-icon class="favoriteIcon">
-        favorite
+        star
       </v-icon>
     </div>
 
@@ -138,11 +138,11 @@ export default {
     display: none;
     position: absolute;
     top: 7px;
-    left: -20px;
+    left: -21px;
 
     .favoriteIcon {
       color: #172dde;
-      font-size: 40px;
+      font-size: 50px;
     }
   }
 
