@@ -114,8 +114,7 @@ export default {
       const marker = new window.google.maps.Marker({
         position: eventLocation,
         animation: window.google.maps.Animation.DROP,
-        map: this.map,
-        title: 'test'
+        map: this.map
       })
       marker.addListener('click', () => infoWindow.open(this.map, marker))
       this.markers.push(marker)
