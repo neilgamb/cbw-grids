@@ -99,12 +99,9 @@ export default {
       return moment(date).format('h:mm a')
     },
     handleEventClick() {
-      if (
-        this.$auth.$state.loggedIn &&
-        this.$route.name === 'index'
-      ) {
+      if (this.$auth.$state.loggedIn && this.$route.name === 'index') {
         this.toggleEventFavorite()
-      } else {
+      } else if (this.$auth.$state.loggedIn && this.$route.name === 'profile') {
         this.openEventDetail()
       }
     },
