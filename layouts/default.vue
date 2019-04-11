@@ -35,6 +35,7 @@ export default {
   computed: {
     ...mapGetters({
       dates: 'general/dates',
+      currentPeriod: 'general/currentPeriod',
       venues: 'grid/venues',
       events: 'grid/events',
       favorites: 'general/favorites',
@@ -43,6 +44,9 @@ export default {
   },
   watch: {
     events: function () {
+      this.buildGrid()
+    },
+    currentPeriod: function () {
       this.buildGrid()
     },
     favorites: async function (val) {
