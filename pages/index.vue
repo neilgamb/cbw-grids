@@ -1,8 +1,14 @@
 <template>
-  <GridContainer
-    :current-period="currentPeriod"
-    class="gridViewContainer"
-  />
+  <div>
+    <GridContainer
+      v-if="!loading"
+      :current-period="currentPeriod"
+      class="gridViewContainer"
+    />
+    <div v-else>
+      Loading
+    </div>
+  </div>
 </template>
 
 <script>
@@ -16,7 +22,10 @@ export default {
     GridContainer
   },
   computed: {
-    ...mapGetters({ currentPeriod: 'general/currentPeriod' })
+    ...mapGetters({
+      loading: 'general/loading',
+      currentPeriod: 'general/currentPeriod'
+    })
   }
 }
 </script>

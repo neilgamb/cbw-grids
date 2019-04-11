@@ -5,7 +5,8 @@ export const state = () => ({
   currentDay: 0,
   currentPeriod: 0,
   dates: dates.festDays,
-  favorites: []
+  favorites: [],
+  loading: false
 })
 
 export const getters = {
@@ -13,7 +14,8 @@ export const getters = {
   currentDay: state => state.currentDay,
   currentPeriod: state => state.currentPeriod,
   dates: state => state.dates.filter(date => date.period === state.currentPeriod),
-  favorites: state => state.favorites
+  favorites: state => state.favorites,
+  loading: state => state.loading
 }
 
 export const actions = {
@@ -31,6 +33,9 @@ export const actions = {
   },
   setFavorites({ commit }, favorites) {
     commit('setFavorites', favorites)
+  },
+  toggleLoading({ commit }) {
+    commit('toggleLoading')
   }
 }
 
@@ -50,5 +55,8 @@ export const mutations = {
   },
   setFavorites(state, favorites) {
     state.favorites = favorites
+  },
+  toggleLoading(state) {
+    state.loading = !state.loading
   }
 }
