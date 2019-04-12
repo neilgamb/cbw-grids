@@ -34,8 +34,11 @@ export const actions = {
   setFavorites({ commit }, favorites) {
     commit('setFavorites', favorites)
   },
-  toggleLoading({ commit }) {
-    commit('toggleLoading')
+  enableLoader({ commit }) {
+    commit('enableLoader')
+  },
+  disableLoader({ commit }) {
+    commit('disableLoader')
   }
 }
 
@@ -56,7 +59,10 @@ export const mutations = {
   setFavorites(state, favorites) {
     state.favorites = favorites
   },
-  toggleLoading(state) {
-    state.loading = !state.loading
+  enableLoader(state) {
+    state.loading = true
+  },
+  disableLoader(state) {
+    state.loading = false
   }
 }

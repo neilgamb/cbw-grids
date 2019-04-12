@@ -10,7 +10,7 @@
               :grid-item="gridItem"
               class="gridItem"
             />
-            <NoFavMsg v-if="grid.length === 0" />
+            <NoFavMsg v-if="!loading && grid.length === 0" />
           </div>
         </li>
       </ul>
@@ -39,7 +39,8 @@ export default {
     ...mapGetters({
       dates: 'general/dates',
       currentDay: 'general/currentDay',
-      grid: 'grid/grid'
+      grid: 'grid/grid',
+      loading: 'general/loading'
     })
   },
   watch: {

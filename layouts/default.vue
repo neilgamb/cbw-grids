@@ -70,6 +70,7 @@ export default {
     }
   },
   mounted() {
+    this.enableLoader()
     this.getEvents()
     this.getVenues()
     this.userValidate()
@@ -81,28 +82,27 @@ export default {
       setGrid: 'grid/setGrid',
       setFavorites: 'general/setFavorites',
       setFavGrid: 'grid/setFavGrid',
-      toggleLoading: 'general/toggleLoading'
+      enableLoader: 'general/enableLoader',
+      disableLoader: 'general/disableLoader'
     }),
     async getEvents() {
-      this.toggleLoading()
       try {
         const events = await EventService.getEvents()
         this.setEvents(events)
       } catch (error) {
         console.log(error) // eslint-disable-line
       }
-      this.toggleLoading()
     },
     async getVenues() {
-      this.toggleLoading()
       try {
+        this.enableLoader()
         const venues = await VenueService.getVenues()
         this.setVenues(venues)
+        this.disableLoader()
         this.buildGrid()
       } catch (error) {
         console.log(error) // eslint-disable-line
       }
-      this.toggleLoading()
     },
     sortEvents(events) {
       return events.sort((a, b) => {
@@ -110,7 +110,6 @@ export default {
       })
     },
     buildGrid() {
-      this.toggleLoading()
       const { dates, events, venues, favorites } = this
       const onMyGrids = this.$auth.loggedIn && this.$route.name === 'profile'
       const grid = []
@@ -155,7 +154,6 @@ export default {
         })
       })
       this.setGrid(grid)
-      this.toggleLoading()
     },
     async getUsers() {
       const users = await UserService.getUsers()
