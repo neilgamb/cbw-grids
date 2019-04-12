@@ -43,7 +43,7 @@
         </v-list-tile-content>
       </v-list-tile>
 
-      <v-list-tile v-if="!loggedIn" to="/profile" router exact @click="login">
+      <v-list-tile v-if="!loggedIn" to="/login" router exact>
         <v-list-tile-action>
           <v-icon>exit_to_app</v-icon>
         </v-list-tile-action>

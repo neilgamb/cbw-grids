@@ -155,10 +155,6 @@ export default {
       })
       this.setGrid(grid)
     },
-    async getUsers() {
-      const users = await UserService.getUsers()
-      this.users = users
-    },
     async userValidate() {
       if (this.$auth.$state.loggedIn) {
         const users = await UserService.getUsers()

@@ -75,9 +75,14 @@ module.exports = {
 
   auth: {
     strategies: {
-        google: {
-          client_id: '33548211507-2dpibnjo0kpg9vahcrltqfjvlis02vsv.apps.googleusercontent.com',
-        },
+      google: {
+        client_id: '33548211507-2dpibnjo0kpg9vahcrltqfjvlis02vsv.apps.googleusercontent.com',
+      },
+      facebook: {
+        client_id: '421790271954301',
+        userinfo_endpoint: 'https://graph.facebook.com/v2.12/me?fields=about,name,picture{url},email,birthday',
+        scope: ['public_profile', 'email', 'user_birthday']
+      }
     },
   },
 
