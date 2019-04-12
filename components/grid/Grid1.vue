@@ -2,7 +2,7 @@
   <div class="gridGlide">
     <div class="glide__track" data-glide-el="track">
       <ul class="glide__slides">
-        <li v-for="(date, index) in dates" :key="index" class="day glide__slide grid_slide">
+        <li v-for="(date, index) in dates" :key="index" class="day glide__slide">
           <GridItem
             v-for="(gridItem, i) in grid"
             :key="gridItem.venue.name"
@@ -44,7 +44,6 @@ export default {
   watch: {
     currentDay: function (val) {
       this.glide.go(`=${val}`)
-      document.querySelector('.gridItem0').scrollIntoView()
     }
   },
   mounted() {
@@ -55,7 +54,7 @@ export default {
     createGlide() {
       const glide = new Glide('.gridGlide', {
         type: 'carousel',
-        startAt: 0,
+        startAt: this.currentDay,
         perView: 1,
         animationDuration: 500,
         swipeThreshold: 80
@@ -64,6 +63,7 @@ export default {
       this.glide = glide
 
       glide.on(['run'], () => {
+        console.log(`currentDay: ${this.currentDay} / slideIndex: ${glide.index}`) // eslint-disable-line
         this.setCurrentDay(glide.index)
       })
 
