@@ -11,7 +11,10 @@
       <v-list-tile v-if="loggedIn" to="/profile" router exact>
         <v-list-tile-action>
           <v-avatar size="35">
-            <img :src="profilePic">
+            <img v-if="loggedIn" :src="profilePic">
+            <v-icon v-else>
+              person
+            </v-icon>
           </v-avatar>
         </v-list-tile-action>
         <v-list-tile-content>
@@ -78,7 +81,15 @@ export default {
       return this.$auth.loggedIn
     },
     profilePic() {
-      return this.$auth.loggedIn && this.$auth.user.picture
+      const { strategy, user } = this.$auth
+
+      switch (strategy.name) {
+        case 'google':
+          return user.picture
+        case 'facebook':
+          return user.picture.data.url
+        default: return 'http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'
+      }
     },
     drawer: {
       get() {
