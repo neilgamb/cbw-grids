@@ -2,16 +2,14 @@
   <div class="gridGlide">
     <div class="glide__track" data-glide-el="track">
       <ul class="glide__slides">
-        <li v-for="(date, index) in dates" :key="index" class="day glide__slide">
-          <div v-if="currentDay === index">
-            <GridItem
-              v-for="gridItem in grid"
-              :key="gridItem.venue.name"
-              :grid-item="gridItem"
-              class="gridItem"
-            />
-            <NoFavMsg v-if="!loading && grid.length === 0" />
-          </div>
+        <li v-for="(date, index) in dates" :key="index" class="day glide__slide grid_slide">
+          <GridItem
+            v-for="(gridItem, i) in grid"
+            :key="gridItem.venue.name"
+            :grid-item="gridItem"
+            :class="getClass(i)"
+          />
+          <NoFavMsg v-if="!loading && grid.length === 0" />
         </li>
       </ul>
     </div>
@@ -46,6 +44,7 @@ export default {
   watch: {
     currentDay: function (val) {
       this.glide.go(`=${val}`)
+      document.querySelector('.gridItem0').scrollIntoView()
     }
   },
   mounted() {
@@ -69,6 +68,9 @@ export default {
       })
 
       glide.mount()
+    },
+    getClass(i) {
+      return `gridItem gridItem${i}`
     }
   }
 }
