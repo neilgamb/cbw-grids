@@ -58,7 +58,8 @@ export default {
         type: 'carousel',
         startAt: 0,
         perView: 1,
-        animationDuration: 500
+        animationDuration: 500,
+        swipeThreshold: 120
       })
 
       this.glide = glide
