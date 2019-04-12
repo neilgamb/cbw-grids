@@ -58,7 +58,7 @@ export default {
         startAt: 0,
         perView: 1,
         animationDuration: 500,
-        swipeThreshold: 120
+        swipeThreshold: 80
       })
 
       this.glide = glide
