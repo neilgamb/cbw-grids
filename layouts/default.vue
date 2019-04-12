@@ -81,7 +81,6 @@ export default {
       setVenues: 'grid/setVenues',
       setGrid: 'grid/setGrid',
       setFavorites: 'general/setFavorites',
-      setFavGrid: 'grid/setFavGrid',
       enableLoader: 'general/enableLoader',
       disableLoader: 'general/disableLoader'
     }),
